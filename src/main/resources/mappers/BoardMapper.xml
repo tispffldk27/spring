@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.spring.dao.BoardDAO">
+  <select id="getBoardList" resultType="kr.green.spring.vo.BoardVO">
+  	select * from board where valid = 'I' 
+  	<if test="type == 1">
+  		AND title like concat('%',#{search},'%')			<!--concat 이어붙이는 함수  -->
+  	</if>
+  	 	<if test="type == 2">
+  		AND contents like concat('%',#{search},'%')
+  	</if>
+  	 	<if test="type == 3">
+  		AND writer like concat('%',#{search},'%')
+  	</if>
+  	ORDER BY num desc
+  	limit #{pageStart},#{perPageNum}
+  </select>
+  <select id="getBoard" resultType="kr.green.spring.vo.BoardVO">
+  	select * from board where num = #{num} and valid = 'I'
+  </select>
+  <update id="updateViews">
+  	update board set views=views+1 where num = #{num}
+  </update>
+  <update id="updateBoard">
+  	update board set 
+  		title = #{title},
+  		contents = #{contents},
+  		file = #{file},
+  		views = #{views}
+ 		where num = #{num}
+  </update>
+  <insert id="registerBoard">
+  	insert into board(title,contents,writer,file)
+   values(#{title},#{contents},#{writer},#{file})
+  </insert>
+  <update id="deleteBoard">
+  	update board set
+  		valid = 'D'
+  		where num = #{num}
+  </update>
+  <select id="getTotalCount" resultType="int">
+  	select count(*) from board where valid ='I'
+  	<if test="type == 1">
+  		AND title like concat('%',#{search},'%')
+  	</if>
+  	 	<if test="type == 2">
+  		AND contents like concat('%',#{search},'%')
+  	</if>
+  	 	<if test="type == 3">
+  		AND writer like concat('%',#{search},'%')
+  	</if>
+  </select>
+</mapper>
