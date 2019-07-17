@@ -16,7 +16,7 @@ public class UnauthInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user != null) { 		//user에 null이 아니면
+		if(user != null) {
 			response.sendRedirect(request.getContextPath()+"/board/list");
 		}
 		return true;

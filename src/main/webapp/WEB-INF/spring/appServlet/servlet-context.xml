@@ -26,29 +26,23 @@
 	<beans:bean id="loginInterceptor" 
 		class="kr.green.spring.interceptor.LoginInterceptor"></beans:bean>
 	<beans:bean id="authInterceptor" 
-	class="kr.green.spring.interceptor.AuthInterceptor"></beans:bean>
+		class="kr.green.spring.interceptor.AuthInterceptor"></beans:bean>
 	<beans:bean id="unauthInterceptor" 
-	class="kr.green.spring.interceptor.UnauthInterceptor"></beans:bean>
-	
+		class="kr.green.spring.interceptor.UnauthInterceptor"></beans:bean>
 	<interceptors>
 	    <interceptor>
-	        <mapping path="/signin"/>				<!-- mapping은 URL 경로이고  -->
-	        <beans:ref bean="loginInterceptor"/>	<!-- beans:ref가 인터셉터를 실행 -->
+	        <mapping path="/signin"/>
+	        <beans:ref bean="loginInterceptor"/>
 	    </interceptor>
-	</interceptors>
-	<interceptors>
+	    <interceptor>
+	        <mapping path="/board/*"/>
+	        <beans:ref bean="authInterceptor"/>
+		</interceptor>
 		<interceptor>
-        	<mapping path="/board/*"/>
-        	<beans:ref bean="authInterceptor"/>
+	        <mapping path="/signin"/>
+	        <mapping path="/signup"/>
+	        <mapping path="/"/>
+	        <beans:ref bean="unauthInterceptor"/>
 		</interceptor>
 	</interceptors>
-	<interceptors>
-		<interceptor>
-        	<mapping path="/signin"/>
-        	<mapping path="/signup"/>
-        	<mapping path="/"/>
-        	<beans:ref bean="unauthInterceptor"/>
-		</interceptor>
-	</interceptors>
-	
 </beans:beans>

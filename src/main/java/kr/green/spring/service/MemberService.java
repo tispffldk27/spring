@@ -9,6 +9,4 @@ public interface MemberService {
 	public MemberVO signin(MemberVO mVo);
 
 	public boolean modify(MemberVO mVo, String oldPw);
-
-	
 }

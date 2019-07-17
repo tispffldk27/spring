@@ -11,13 +11,11 @@ public interface BoardService {
 
 	ArrayList<BoardVO> getBoardList(Criteria cri);
 
-	BoardVO getBoard(Integer num);	
+	BoardVO getBoard(Integer num);
 
 	void updateViews(Integer num);
 
 	void updateBoard(BoardVO bVo, HttpServletRequest r);
-
-	
 
 	void registerBoard(BoardVO boardVo);
 
@@ -26,9 +24,5 @@ public interface BoardService {
 	boolean isWriter(Integer num, HttpServletRequest r);
 
 	int getTotalCount(Criteria cri);
-
-
-
-
 
 }

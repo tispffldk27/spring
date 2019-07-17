@@ -43,24 +43,21 @@ public class BoardServiceImp implements BoardService {
 
 	@Override
 	public void updateBoard(BoardVO bVo, HttpServletRequest r) {
-		MemberVO user= (MemberVO)r.getSession().getAttribute("user");
-		if(user == null || bVo == null) return;
+		MemberVO user = (MemberVO)r.getSession().getAttribute("user");
+		if(user == null || bVo == null)	return ;
 		if(bVo.getWriter() != null && bVo.getWriter().equals(user.getId())) {
 			boardDao.updateBoard(bVo);
 		}
 	}
 
-	
 	@Override
 	public void registerBoard(BoardVO boardVo) {
 		boardDao.registerBoard(boardVo);
-		
 	}
 
 	@Override
 	public void deleteBoard(Integer num) {
-		if(num == null || num <= 0) return;
-		
+		if(num == null || num <= 0)	return;
 		boardDao.deleteBoard(num);
 	}
 
@@ -68,7 +65,8 @@ public class BoardServiceImp implements BoardService {
 	public boolean isWriter(Integer num, HttpServletRequest r) {
 		BoardVO board = boardDao.getBoard(num);
 		MemberVO user = (MemberVO)r.getSession().getAttribute("user");
-		if(board != null && user != null && board.getWriter().equals(user.getId())) {
+		if(board != null && user != null 
+				&& board.getWriter().equals(user.getId())) {
 			return true;
 		}
 		return false;
@@ -78,11 +76,5 @@ public class BoardServiceImp implements BoardService {
 	public int getTotalCount(Criteria cri) {
 		return boardDao.getTotalCount(cri);
 	}
-
-
-
-	
-
-
 
 }

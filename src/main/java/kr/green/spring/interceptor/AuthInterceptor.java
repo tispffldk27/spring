@@ -16,7 +16,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(user == null) { 	//user 에 null값이 있으면
+		if(user == null) {
 			response.sendRedirect(request.getContextPath()+"/");
 		}
 		return true;

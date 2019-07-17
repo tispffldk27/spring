@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -57,7 +56,6 @@ public class HomeController {
 	@RequestMapping(value = "/signin", method = RequestMethod.POST)
 	public String signinPost(Model model, MemberVO mVo) {
 		logger.info("로그인 진행중");
-		System.out.println(mVo);
 		MemberVO user = memberService.signin(mVo);
 		if(user != null) {
 			model.addAttribute("user", user);
@@ -78,17 +76,11 @@ public class HomeController {
 		}
 		return "redirect:/member/modify";
 	}
-	
-	@RequestMapping(value = "/signout")
+	@RequestMapping(value="/signout")
 	public String signout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("user");
 		return "redirect:/";
 	}
-	
-	
-
-	
-	
 }
 

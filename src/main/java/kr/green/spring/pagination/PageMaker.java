@@ -3,28 +3,31 @@ package kr.green.spring.pagination;
 public class PageMaker {
 	//endPage를 계산하기 위해서 전체 게시글 갯수가 필요
 	private int totalCount;
-	private int startPage;		//페이지네이션의 시작번호
-	private int endPage;		//페이지네이션의 끝 번호
-	private boolean prev;		//이전버튼 활성화 
-	private boolean next;		//다음버튼 활성화
-	private int displayPageNum;		//한 페이지네이션의 페이지 갯수
-	private Criteria criteria;		//현재 페이지 정보
+	private int startPage;	//페이지네이션의 시작 번호
+	private int endPage;	//페이지네이션의 끝 번호
+	private boolean prev;	//이전버튼 활성화
+	private boolean next;	//다음버튼 활성화
+	private int displayPageNum;	//페이지 네이션의 페이지 갯수
+	private Criteria criteria;	//현재 페이지 정보
 	
 	/* endPage, startPage, prev, next 값 계산 */
 	public void calcData() {
 		/* starPage와 endPage는 현재 페이지 정보인 criteria와 displayPageNum을 이용하여 계산
-		 * displayPageNum이 10이고 현재 페이지가 3페이지면 startPage = 1, endPage = 10이 되도록 계산 */
+		 * displayPageNum이 10이고 현재 페이지가 31페이지면 startPage = 31, endPage = 40이 되도록 계산 */
 		endPage = (int) (Math.ceil(criteria.getPage()/(double) displayPageNum)*displayPageNum);
-		
+		//endPage = 40;
 		startPage = (endPage - displayPageNum)+1;
+		//startPage = 31
 		/* 총 콘텐츠 갯수를 이용하여 마지막 페이지 번호를 계산 */
-		
+		//perPageNum = 15; 
+		//totalCount = 563;
 		int tempEndPage = (int)(Math.ceil(totalCount/(double)criteria.getPerPageNum()));
-		
+		//tempEndPage = 38
 		/* 현재 페이지에 계산된 현재 페이지메이커의 마지막 페이지 번호와 실제 마지막 페이지 번호를 비교하여
 		 * 작은 값이 마지막 페이지 번호가 됨 */
 		if(endPage > tempEndPage) {
 			endPage = tempEndPage;
+			//endPage = 38
 		}
 		/* 현재 페이지메이커에 시작페이지가 1페이지면 prev가 없어야 함 */
 		prev = startPage == 1 ? false : true;
@@ -80,4 +83,5 @@ public class PageMaker {
 		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage + ", endPage=" + endPage + ", prev="
 				+ prev + ", next=" + next + ", displayPageNum=" + displayPageNum + ", criteria=" + criteria + "]";
 	}
+	
 }
