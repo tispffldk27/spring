@@ -6,9 +6,15 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-		
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/main.css">
+	<script src="//code.jquery.com/jquery-3.4.1.js"></script>	
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$('input[name=id]').focus();
+	})
+	</script>
+	
 	<title>로그인</title>
 	<style>
 	*{
@@ -29,7 +35,7 @@
 </head>
 <body>
 	<div>
-		<div class="offset-4 col-4 border border-dark mt-5">
+		<div class="offset-4 col-4 border border-dark mt-5 clearFix">
 			<h1 class="text-center">로그인</h1>
 			<form method="post" action="<%=request.getContextPath()%>/signin">
 				<div class="row">
@@ -43,6 +49,7 @@
 				<div class="offset-8 col-3 clearfix p-0">
 					<button class="btn btn-primary float-right">로그인</button>
 				</div>
+				<a href="<%=request.getContextPath()%>/password/find" class="float-right">비밀번호 찾기</a>
 			</form>
 		</div>
 	</div>
